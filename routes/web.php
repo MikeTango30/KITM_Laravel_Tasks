@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+Route::get('/showTasks', 'HomeController@showTasks');
+
+
+Auth::routes();
+
