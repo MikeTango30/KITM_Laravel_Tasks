@@ -59,7 +59,7 @@
                 </div>
                 <div class="row form-group">
                     <div class="offset-md-3 col-md-6 mb-3 mb-md-0">
-                        <label class="text-black" for="taskCompleteness">Percent Completed</label>
+                        <label class="text-black" for="completeness">Percent Completed</label>
                         <input id="number" class="form-control" name="completeness" value="{{ $task->completeness }}">
                     </div>
                 </div>
