@@ -72,3 +72,5 @@
         </div>
     </div>
 @stop
+
+{{--http://web-training.lt/uzduotys/larave_projektinis.pdf--}}
