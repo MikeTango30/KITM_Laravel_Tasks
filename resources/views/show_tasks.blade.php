@@ -23,7 +23,7 @@
                     <tbody>
                     @foreach($tasks as $task)
                         <tr>
-                            <td>#</td>
+                            <td>{{ $task->taskId }}</td>
                             <td>{{ ucfirst($task->subject) }}</td>
                             <td>{{ ucfirst($task->priority_name) }}</td>
                             <td>{{ $task->due_date }}</td>
@@ -38,7 +38,28 @@
                                         </button>
                                     </div>
                                     <div class="col-6">
-                                        <a href="/task/update/form/{{ $task->id }}" class="btn btn-success">Update</a>
+                                        <a href="/task/update/form/{{ $task->taskId }}" class="btn btn-success">Update</a>
+                                    </div>
+                                </div>
+                                <!-- Really Delete Modal -->
+                                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteModalLabel">Confirm delete</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Delete task?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <a href="/task/delete/{{ $task->taskId }}" class="btn btn-danger">Delete</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </td>
@@ -46,29 +67,6 @@
                     @endforeach
                     </tbody>
                 </table>
-            @if(isset($task->id))
-                <!-- Really Delete Modal -->
-                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
-                         aria-labelledby="deleteModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteModalLabel">Confirm delete</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Delete task?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <a href="/task/delete/{{ $task->id }}" class="btn btn-danger">Delete</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
             </div>
         </div>
     </div>

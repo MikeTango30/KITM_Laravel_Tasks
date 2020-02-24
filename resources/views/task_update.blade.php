@@ -65,7 +65,7 @@
                 </div>
                 <div class="row form-group">
                     <div class="offset-md-3 col-md-6">
-                        <input type="submit" value="Add Task" class="btn btn-primary py-2 px-4 text-white">
+                        <input type="submit" value="Update task" class="btn btn-primary py-2 px-4 text-white">
                     </div>
                 </div>
             </form>
