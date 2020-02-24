@@ -1,5 +1,5 @@
 ### Task: Todo list.
-
+Description: [Here](http://web-training.lt/uzduotys/larave_projektinis.pdf)
 - Setup:
     -   composer install
     -   php artisan migrate
