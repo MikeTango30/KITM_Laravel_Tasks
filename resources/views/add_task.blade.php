@@ -2,27 +2,26 @@
 @section('promo')
     @component('_partials.promo')
         @slot('title')
-            <h1>Add new Task</h1>
+            <h1 class="my-auto w-100">Add new Task</h1>
         @endslot
     @endcomponent
 @stop
 @section('content')
     <div class="container">
-        <div class="row errors">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
         <div class="row add-task">
-            <h3>Add new Task</h3>
             <form method="post" action="/store-task" class="p-5 bg-white w-100" enctype="multipart/form-data">
                 @csrf
+                <div class="row errors">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
                 <div class="row form-group">
                     <div class="offset-md-3 col-md-6 mb-3 mb-md-0">
                         <label class="text-black" for="taskSubject">Subject</label>

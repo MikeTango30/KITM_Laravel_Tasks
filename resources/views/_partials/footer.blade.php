@@ -1,7 +1,5 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: moksleivis
- * Date: 2020-02-24
- * Time: 09:27
- */
+<footer class="page-footer">
+    <div class="row no-gutters pl-5">
+        <em>Mantas Tarutis ŽP19/2T</em>
+    </div>
+</footer>

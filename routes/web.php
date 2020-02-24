@@ -17,6 +17,7 @@ Route::post('/store-task', 'TaskController@storeTask');
 Route::get('/task/update/form/{task}', 'TaskController@showUpdateTaskForm');
 Route::post('/task/update/{task}', 'TaskController@updateTask');
 Route::get('/task/delete/{task}', 'TaskController@destroy');
+Route::get('/logout', 'HomeController@logout');
 
 Auth::routes();
 

@@ -7,6 +7,7 @@ use App\Status;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class TaskController extends Controller
 {
@@ -43,6 +44,7 @@ class TaskController extends Controller
 
     public function showUpdateTaskForm(Task $task)
     {
+
         $statuses = Status::all();
         $statusId = $task->getAttribute('status_id');
         $currentStatus = Status::select('status_name')->find($statusId);
@@ -51,34 +53,38 @@ class TaskController extends Controller
         $priorityId = $task->getAttribute('priority_id');
         $currentPriority = Priority::select('priority_name')->find($priorityId);
 
-
         return view('task_update',
             compact('task', 'statuses', 'currentStatus', 'priorities', 'currentPriority'));
     }
 
+
     public function updateTask(Request $request, Task $task)
     {
-
-        $validatedData = $request->validate([
-            'subject' => 'required',
-            'priority_id' => 'required',
-            'due_date' => 'required',
-            'status_id' => 'required',
-            'completeness' => 'required|numeric|between:0,100'
-        ]);
-
+        if (Gate::allows('update', $task)) {
+            $validatedData = $request->validate([
+                'subject' => 'required',
+                'priority_id' => 'required',
+                'due_date' => 'required',
+                'status_id' => 'required',
+                'completeness' => 'required|numeric|between:0,100'
+            ]);
 
             Task::where('id', $task->getAttribute('id'))->update($request->except(['_token']));
 
             return redirect('/');
+        }
 
+        return view('authorization_error');
     }
 
     public function destroy(Task $task)
     {
+        if (Gate::allows('destroy', $task)) {
+            $task->delete();
 
-        $task->delete();
+            return redirect('/');
+        }
 
-        return redirect('/');
+        return view('authorization_error');
     }
 }

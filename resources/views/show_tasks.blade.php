@@ -1,16 +1,22 @@
 @extends('layouts.main')
-
+@section('promo')
+    @component('_partials.promo')
+        @slot('title')
+            <h1 class="my-auto w-100">My Tasks</h1>
+        @endslot
+    @endcomponent
+@stop
 @section('content')
     <div class="container-fluid">
         <div class="container">
-            <div class="row justify-content-center">
-                <h2>My TODO list</h2>
+            <div class="row">
+                <a href="{{ url('/add-task') }}" class="btn btn-primary my-5">Add new task</a>
             </div>
             <div class="row">
-                <table class="table table-striped">
+                <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col"></th>
+                        <th scope="col">#</th>
                         <th scope="col">Subject</th>
                         <th scope="col">Priority</th>
                         <th scope="col">Due Date</th>
@@ -23,13 +29,22 @@
                     <tbody>
                     @foreach($tasks as $task)
                         <tr>
-                            <td>{{ $task->taskId }}</td>
-                            <td>{{ ucfirst($task->subject) }}</td>
-                            <td>{{ ucfirst($task->priority_name) }}</td>
-                            <td>{{ $task->due_date }}</td>
-                            <td>{{ ucfirst($task->status_name) }}</td>
-                            <td>{{ $task->completeness }}</td>
-                            <td>{{ $task->updated_at }}</td>
+                            <td class="task task--id">{{ $loop->index + 1 }}</td>
+                            <td class="task task--subject">{{ ucfirst($task->subject) }}</td>
+                            <td class="task task--priority">
+                                <span class="badge badge-pill badge-{{ $task->priority_name }}">{{ ucfirst($task->priority_name) }}</span>
+                            </td>
+                            <td class="task task--due-date">{{ $task->due_date }}</td>
+                            <td class="task task--status">{{ ucfirst($task->status_name) }}</td>
+                            <td class="task task--completeness">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ $task->completeness }}"
+                                         aria-valuemin="0" aria-valuemax="100" style="width:{{ $task->completeness }}%">
+                                        {{ $task->completeness }}% Complete
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="task task--modified">{{ $task->updated_at }}</td>
                             <td>
                                 <div class="row">
                                     <div class="col-6">
