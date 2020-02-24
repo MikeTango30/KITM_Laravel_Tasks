@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -16,18 +18,13 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('home');
-    }
-
     public function showTasks()
     {
-        return view('showTasks');
+        $tasks = Task::select('*', DB::raw("tasks.id as taskId"))
+            ->join('statuses', 'tasks.status_id', '=', 'statuses.id')
+            ->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
+            ->simplePaginate(10);
+
+        return view('show_tasks', compact('tasks'));
     }
 }
